@@ -35,29 +35,26 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(NMEA2K-Pico NMEA2K-Pico.cpp )
+#add_executable(NMEA2K-Pico NMEA2K-Pico.cpp )
 
-pico_set_program_name(NMEA2K-Pico "NMEA2K-Pico")
-pico_set_program_version(NMEA2K-Pico "0.1")
+#ico_set_program_name(NMEA2K-Pico "NMEA2K-Pico")
+#pico_set_program_version(NMEA2K-Pico "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(NMEA2K-Pico 0)
-pico_enable_stdio_usb(NMEA2K-Pico 1)
+#pico_enable_stdio_uart(NMEA2K-Pico 0)
+#pico_enable_stdio_usb(NMEA2K-Pico 1)
 
 # Add the standard library to the build
-target_link_libraries(NMEA2K-Pico
-        pico_stdlib)
+#target_link_libraries(NMEA2K-Pico
+#        pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(NMEA2K-Pico PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
-)
+#target_include_directories(NMEA2K-Pico PRIVATE
+#        ${CMAKE_CURRENT_LIST_DIR}
+#)
 
-# Add any user requested libraries
-target_link_libraries(NMEA2K-Pico 
-        hardware_spi
-        
-        )
+# Project-specific submodules in subdirectories:
+add_subdirectory(Pi-CAN)
 
-pico_add_extra_outputs(NMEA2K-Pico)
 
+#pico_add_extra_outputs(NMEA2K-Pico)
