@@ -9,8 +9,8 @@ project(pico-nmea2k C CXX ASM)
 # Add executable. Default name is the project name, version 0.1
 add_executable(pico-nmea2k
     # Library executables
-    ./CAN/mcp2515.cpp
-    ./CAN/NMEA2000_PICO.cpp
+    ./NMEA2000_PICO/mcp2515.cpp
+    ./NMEA2000_PICO/NMEA2000_PICO.cpp
     ./LCD/lcd_1602_i2c.cpp
     ../NMEA/src/N2kMsg.cpp
     ../NMEA/src/N2kStream.cpp
