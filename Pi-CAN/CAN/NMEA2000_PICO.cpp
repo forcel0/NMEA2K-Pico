@@ -50,11 +50,8 @@ bool CanInUse = false;
 tNMEA2000_pico *pNMEA2000_mcp = 0;
 
 void CanIdToN2k(unsigned long id, unsigned char &prio, unsigned long &pgn, unsigned char &src, unsigned char &dst);
-// #if defined(ESP8266)
-// ICACHE_RAM_ATTR void Can1Interrupt();
-// #else
+
 void Can1Interrupt(uint gpio, uint32_t events);
-// #endif
 
 //*****************************************************************************
 void PrintDecodedCanIdAndLen(unsigned long id, unsigned char len) {
@@ -81,7 +78,7 @@ tNMEA2000_pico::tNMEA2000_pico(uint8_t _N2k_CAN_CS_PIN, uint8_t _N2k_CAN_INT_PIN
 {
   IsOpen = false;
 
-  if(pNMEA2000_mcp ==0 ) { // Currently only first instance can use interrupts.
+  if(pNMEA2000_mcp == 0) { // Currently only first instance can use interrupts.
     N2k_CAN_INT_PIN = _N2k_CAN_INT_PIN;
     if(UseInterrupt()) {
       MaxCANReceiveFrames = _rx_frame_buf_size;
@@ -128,7 +125,6 @@ bool tNMEA2000_pico::CANSendFrame(unsigned long id, unsigned char len, const uns
   } 
   else {
     result = (N2kCAN.sendMessage(wait_sent ? (MCP2515::TXBn)N2kCAN.getLastTxBuffer() : (MCP2515::TXBn)0xff, &tx) == MCP2515::RETURN_OK);
-    //result = (N2kCAN.trySendExtMsgBuf(id, len, buf, wait_sent ? N2kCAN.getLastTxBuffer() : 0xff) == MCP2515::ERROR_OK);
   }
 
   DbgTestMcpSpeed { DbgPrintN2kMcpSpeed("Send elapsed: "); DbgPrintLnN2kMcpSpeed(McpElapsed); }
@@ -209,10 +205,6 @@ bool tNMEA2000_pico::CANGetFrame(unsigned long &id, unsigned char &len, unsigned
     return HasFrame;
 }
 
-//*****************************************************************************
-// I am still note sure am I handling volatile right here since mcp_can has not
-// been defined volatile. see. http://blog.regehr.org/archives/28
-// In my tests I have used only to receive data or transmit data but not both.
 void tNMEA2000_pico::InterruptHandler(uint gpio, uint32_t events) {
 #if defined(DEBUG_NMEA2000_ISR)
   uint64_t ISRStart = time_us_64();
@@ -273,7 +265,7 @@ void tNMEA2000_pico::InterruptHandler(uint gpio, uint32_t events) {
   } while (RxTxStatus != 0);
 
 #if defined(DEBUG_NMEA2000_ISR)
-  ISRElapsed=micros()-ISRStart;
+  ISRElapsed = micros() - ISRStart;
 #endif
 }
 
@@ -286,10 +278,6 @@ void tNMEA2000_mcp::TestISR() {    // if ( CanIntChk ) { Serial.print("CAN int c
 
 
 // //*****************************************************************************
-// #if defined(ESP8266)
-// ICACHE_RAM_ATTR void Can1Interrupt() {
-// #else
 void Can1Interrupt(uint gpio, uint32_t events) {
-// #endif
    pNMEA2000_mcp->InterruptHandler(gpio, events);
  }
