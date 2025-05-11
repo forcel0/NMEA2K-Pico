@@ -1,3 +1,12 @@
+// Application using NMEA2000 libray from Timo Lappalainen (ttlappalainen)
+// https://github.com/ttlappalainen/NMEA2000 to read Airmar DST-810 CAN triducer
+// and convert can speed to 12VDC PWM output that can be read by Mastercraft
+// Indmar MEFI5 ECU to replace failed proprietary triducer
+// Hardware is Pi Pico W, Adafruit CAN PiCowbell Hat, Airmar DST-810
+// There is also an LCD 2x16 LCD screen for visual that the converter is
+// reading values from the CAN bus and is operational.
+
+
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/time.h"
@@ -44,16 +53,6 @@ void SetPWMFreq(uint slice_num, uint freq_hz) {
   pwm_set_chan_level(slice_num, PWM_CHAN_A, 65535 / 2); // 50% duty
   pwm_set_enabled(slice_num, true);
 }
-
-// void SetupPWM(uint SliceNum) {
-//   // default 125 MHz clock = 125,000,000 / (25000 × 5) = 1000 Hz
-//   // freq = clock / (wrap + 1) / clk_div
-//   pwm_set_wrap(SliceNum, 10000);        // wrap value
-//   pwm_set_clkdiv(SliceNum, 50.0f);      // clock divider
-
-//   pwm_set_chan_level(SliceNum, PWM_CHAN_A, 5000);  // 50% duty (25000/2)
-//   pwm_set_enabled(SliceNum, true);
-// }
 
 void PaddleWheel(const tN2kMsg &N2kMsg) {
   unsigned char SID;
@@ -112,9 +111,9 @@ int main() {
 
     NMEA2000.SetN2kCANMsgBufSize(8);
     NMEA2000.SetN2kCANReceiveFrameBufSize(100);
-    //NMEA2000.SetForwardStream((N2kStream*)&stdout);  // PC output on due native port
-    //NMEA2000.EnableForward(false);                 // Disable all msg forwarding to USB (=Serial)
-    NMEA2000.SetForwardType(tNMEA2000::fwdt_Text); // Show in clear text
+    //NMEA2000.SetForwardStream((N2kStream*)&stdout); // PC output on due native port
+    //NMEA2000.EnableForward(false);                  // Disable all msg forwarding to USB (=Serial)
+    NMEA2000.SetForwardType(tNMEA2000::fwdt_Text);    // Show in clear text
     NMEA2000.SetMsgHandler(HandleNMEA2000Msg);
 
     while (true) {
