@@ -1,6 +1,13 @@
 /*
 NMEA2000_PICO.cpp
 
+Copyright (c) 2025 Jim Greaves
+
+based on the code base Timo Lappalainen, Kave Oy, www.kave.fi
+found at https://github.com/ttlappalainen/NMEA2000_mcp
+
+ported to the Raspberry Pi Pico using MCP2515 CAN bus hat
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software without restriction, including without limitation the rights to use,
