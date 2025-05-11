@@ -30,7 +30,7 @@ add_executable(pico-nmea2k
 
 # Add NMEA Lib
 #target_include_directories(pico-nmea2k PUBLIC include/)
-target_include_directories(pico-nmea2k PUBLIC ./CAN/)
+target_include_directories(pico-nmea2k PUBLIC ./NMEA2000_PICO/)
 target_include_directories(pico-nmea2k PUBLIC ../NMEA/src/)
 target_include_directories(pico-nmea2k PUBLIC ./LCD/)
 
