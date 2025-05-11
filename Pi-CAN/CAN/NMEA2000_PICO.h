@@ -1,7 +1,5 @@
 /*
-NMEA2000_mcp.h
-
-Copyright (c) 2015-2020 Timo Lappalainen, Kave Oy, www.kave.fi
+NMEA2000_pico.h
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -20,16 +18,13 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTIO
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Inherited NMEA2000 object for Arduino CAN_BUS shield or any MCP2515 CAN controller
+Inherited NMEA2000 object for pico CAN bus hat or any MCP2515 CAN controller
 based setup. See also NMEA2000 library.
 */
 
 #ifndef _NMEA2000_PICO_H_
 #define _NMEA2000_PICO_H_
 
-// CAN_BUS_shield libraries will be originally found on https://github.com/Seeed-Studio/CAN_BUS_Shield
-// That does not work completely with N2k or with Maple mini. So there is developed
-// branch found on https://github.com/ttlappalainen/CAN_BUS_Shield
 #include <stdio.h>
 
 #include "can.h"
