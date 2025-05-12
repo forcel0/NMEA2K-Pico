@@ -1,6 +1,9 @@
 [submodule "NMEA"]
 	path = NMEA
 	url = https://github.com/forcel0/NMEA2000.git
+[submodule "NMEA2000_PICO"]
+	path = NMEA2000_PICO
+	url = https://github.com/forcel0/NMEA2000_PICO.git
 [submodule "Pi-CAN/NMEA2000_PICO"]
 	path = Pi-CAN/NMEA2000_PICO
 	url = https://github.com/forcel0/NMEA2000_PICO.git
